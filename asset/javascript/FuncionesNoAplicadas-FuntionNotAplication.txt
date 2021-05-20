@@ -1,0 +1,59 @@
+	<!-- <div id="myProgress" class="progres-Bar"> -->
+	  <!-- <div id="myBar"></div> -->
+	<!-- </div> -->
+
+
+
+	<!-- <button class="btnSelectMusic" id="FoulderMusic">My Foulder Music</button> -->
+
+
+document.getElementById("FoulderMusic").addEventListener("click", function(){
+
+
+ Open_Foulder_Music();
+ 
+	
+});
+
+
+
+function FilterMusic(file){
+		console.log("filter");
+		var Extrat = file.slice((file.lastIndexOf('.') - 1 >>> 0) + 2);//Extenciones Extraidas	
+		if(Extrat=="mp3" || Extrat=="ogg" || Extrat=="wav" || Extrat=="wma" || Extrat=="flac"){		
+			Numimg++;
+			obtenido[Numimg-1] = file;	
+						
+					}
+}
+
+function SearchMusic(Foulder_Select){
+	
+	obtenido = []; //elimpia el array
+	Numimg=0; //limpia el numero de imagenes
+	
+	console.log(Foulder_Select);
+	
+	window.fs().readdir(Foulder_Select,function(err,files){
+	// window.fs().readdir("C:/\Users/\DC/\Documents/\musica/\music",function(err,files){
+		
+		
+		
+			if(err){  return console.error(err);    }
+			   else{
+						//listado de archivos por indice				 
+					// files.forEach((file, index) => {					
+									// // FilterMusic(file);	
+									// // console.log(file);
+									
+									// console.log(file);
+					 // });
+					 
+					 console.log(files);
+							
+					}
+
+			});//cierre	
+			
+}
+}

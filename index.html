@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" type="text/css" href="asset/style/main.css">
+    <link rel="stylesheet" type="text/css" href="asset/style/MyMusic-v1.0/style.css">
+	<title>MY Music</title>
+  </head>
+  <body>
+<main class="Music-Area">
+  
+	<audio id="reproductor" src="" type="audio/mpeg" preload="preload"> </audio>
+
+
+	<div class="Progress">
+		<canvas id="Tocadiscos" class="canvas"></canvas>
+		<div class="PlayList">
+		
+				<div class="Btn-Select-Music">
+					<button class="btnSelectMusic" id="SelectMusic">Select Music</button>
+				</div>	
+				
+			<div id="List-Music">
+			
+				<!-- <div class="List-Item"> -->
+				<!-- <span id="IcoPlayListText" class="PlayListText"style="color:white; font-size:16px;">1.</span><label class="PlayListText" style="color:white; font-size: 16px;">Alitasia - Ay Maracaibo</label><span class="PlayListText" style="color:white; font-size:16px;">00:00:00</span> -->
+				<!-- </div> -->
+				<!-- <div class="List-Item"> -->
+				<!-- <span id="IcoPlayListText" class="PlayListText" style="color:white; font-size:16px;">2.</span><label class="PlayListText" style="color:white; font-size: 16px;">Alitasia - Ay Maracaibo</label><span class="PlayListText" style="color:white; font-size:16px;">00:00:00</span> -->
+				<!-- </div> -->
+				<!-- <div class="List-Item"> -->
+				<!-- <span id="IcoPlayListText" class="PlayListText" style="color:white; font-size:16px;">3.</span><label class="PlayListText" style="color:white; font-size: 16px;">Alitasia - Ay Maracaibo</label><span  class="PlayListText" style="color:white; font-size:16px;">00:00:00</span> -->
+				<!-- </div> -->
+		
+			</div>
+			
+		</div>
+	</div>
+
+
+	
+	<div class="TilteSection">
+		<label id="TitleMusic" class="Tilte-music EfectoTexto"></label>
+		<span id="time-progress" class="Time-progress EfectoTexto" ></span>
+	</div>
+
+	
+
+<div class="ControlButton">
+
+	<div class="btn-basic">
+		<button id="Prev" class="btn Prev-music icon-previous2"></button>
+		<button id="Play" class="btn Play-music icon-play3"></button>
+		<button id="Next" class="btn Next-music icon-next2"></button>
+		<button id="Nute" class="btn Nute-music icon-volume-high"></button>
+	</div>
+
+	<div class="btn-Volume-music">
+		<input type="range" id="Volumen" class="Volume_music" min="0" max="1" value="0.5"  step="0.1" />
+		<span id="VolumenLabel" class="icon-volume-medium"></span>
+	</div>
+
+</div>
+	
+	
+
+</main>
+  
+    <script src="./asset/javascript/PlayControl.js"></script>
+    <script src="./asset/javascript/AnimationRecover.js"></script>
+	
+  </body>
+</html>
