@@ -1,34 +1,10 @@
-// https://www.programmerclick.com/article/6786138472/
-
-const Reproductor = document.getElementById("reproductor");
-const Toca_discos = document.getElementById("Tocadiscos");
-const ctx = Toca_discos.getContext("2d");
-
-let Rote = 0;
-let Frame = 1;
-let State_Animation=false;
-let Nute_music = false;
-
-const Music_Select = [];
-var Action;	
-
-var Numimg=0;
-
-let Pos_in_list = 0;
-var obtenido = [];
-
-let ButtonPlayStop = document.getElementById("Play");
 ButtonPlayStop.addEventListener("click", Play);
+ButtonPrev.addEventListener("click", Prev);
+ButtonNext.addEventListener("click", Next);
+NuteSound.addEventListener("click", Nute);
+SelectMusics.addEventListener("click", Select_Music);
 
-document.getElementById("Prev").addEventListener("click", Prev);
-document.getElementById("Next").addEventListener("click", Next);
-
-let NuteSound = document.getElementById("Nute")
-	NuteSound.addEventListener("click", Nute);
-
-let LabelVolume = document.getElementById("VolumenLabel");
-
-var Volume = document.getElementById("Volumen").addEventListener("change",function(e){	
+Volume.addEventListener("change",function(e){	
 	
 					Reproductor.volume =  e.currentTarget.value;
 					// LabelVolume.innerHTML = e.currentTarget.value*100+"%";
@@ -53,53 +29,30 @@ var Volume = document.getElementById("Volumen").addEventListener("change",functi
 					
 	
 			},true);
-						
-// window.onload=function(){
 
-	// LabelVolume.innerHTML = 50+"%";
-	
-	// document.getElementById("time-progress").innerHTML = "00:00:00" +" | "+"00:00:00";
-
-// }
-		 
 Reproductor.addEventListener("timeupdate", function(){
 
-		var currentTime = Reproductor.currentTime;
-		var duration = Reproductor.duration;
+		currentTime = Reproductor.currentTime;
+		duration = Reproductor.duration;
 
 		document.getElementById("time-progress").innerHTML= timeToMinute(currentTime) +" | "+timeToMinute(duration);
 
 	});
 
-
-let StatePlayStop=false;
-
-	function Play(){
-					
-					
-					
+function Play(){
+				
 		if(!StatePlayStop){
 					Reproductor.pause();
-						StopAnimation();
-					
-					
-				StatePlayStop=true;
-				
-							
-				ButtonPlayStop.classList.remove("icon-pause2");
-				ButtonPlayStop.classList.add("icon-play3");
+					StopAnimation();					
+					StatePlayStop=true;		
+					ButtonPlayStop.classList.remove("icon-pause2");
+					ButtonPlayStop.classList.add("icon-play3");
 			
 				
-				}else{
-					
-						
-						Reproductor.play();
-				PlayAnimation();
-							
-						StatePlayStop=false;
-			
-				
-				
+				}else{					
+				Reproductor.play();
+				PlayAnimation();							
+				StatePlayStop=false;
 				ButtonPlayStop.classList.remove("icon-play3");
 				ButtonPlayStop.classList.add("icon-pause2");
 				
@@ -109,43 +62,105 @@ let StatePlayStop=false;
 	
 	}
 	
-	function Pause(){
+function Pause(){
 		Reproductor.pause();
 						StopAnimation();
 		
 	}
+
+
+let PosLast = 0;
+let PosNow = 0;
+
+PosNow = Pos_in_list;
+
+
 	
-	function Prev(){
+function Prev(){
+	
+	
 		if(Pos_in_list!=0){
 		
 			Pos_in_list-=1;
 			Reproductor.src = obtenido[Pos_in_list];
-			document.getElementById("time-progress").innerHTML = " -- | -- ";
 			document.getElementById("time-progress").innerHTML = timeToMinute(Reproductor.currentTime) +" | "+timeToMinute(Reproductor.duration);
 			document.getElementById("TitleMusic").innerHTML =  window.path().parse(obtenido[Pos_in_list]).name; 
-			Pause();
-			Play();
-		
+			
+			
+					Reproductor.pause();
+				StopAnimation();	
+				StatePlayStop=true;			
+				ButtonPlayStop.classList.remove("icon-pause2");
+				ButtonPlayStop.classList.add("icon-play3");
+
+				Reproductor.play();
+				PlayAnimation();
+							
+				StatePlayStop=false;				
+				ButtonPlayStop.classList.remove("icon-play3");
+				ButtonPlayStop.classList.add("icon-pause2");
+			
+			 	PosLast = PosNow;
+				PosNow = Pos_in_list;
+				
+					
+								   
+			document.getElementsByClassName("List-Item")[PosLast].classList.remove("active-music");
+			document.getElementsByClassName("List-Item")[PosNow].classList.add("active-music");	
+			 
+				
+
+
 		}
 	}
 
-	function Next(){
-		
-		if(Pos_in_list<obtenido.length){
+
+	
+function Next(){
+	
+
+		 if(Pos_in_list<obtenido.length-1){
 			
 			Pos_in_list+=1;
+
 			Reproductor.src = obtenido[Pos_in_list];
-			document.getElementById("time-progress").innerHTML = " -- | -- ";
 			document.getElementById("time-progress").innerHTML = timeToMinute(Reproductor.currentTime) +" | "+timeToMinute(Reproductor.duration);
 			document.getElementById("TitleMusic").innerHTML =  window.path().parse(obtenido[Pos_in_list]).name; 
-			Pause();
-			Play();
 		
+		
+				Reproductor.pause();
+				StopAnimation();	
+				StatePlayStop=true;			
+				ButtonPlayStop.classList.remove("icon-pause2");
+				ButtonPlayStop.classList.add("icon-play3");
+
+				Reproductor.play();
+				PlayAnimation();
+							
+				StatePlayStop=false;				
+				ButtonPlayStop.classList.remove("icon-play3");
+				ButtonPlayStop.classList.add("icon-pause2");
+
 			
-		}
+			 
+			 
+			 	PosLast = PosNow;
+				PosNow = Pos_in_list;
+				
+					
+								   
+			document.getElementsByClassName("List-Item")[PosLast].classList.remove("active-music");
+			document.getElementsByClassName("List-Item")[PosNow].classList.add("active-music");	
+			 
+					
+					
+			}
+	
+	
+	
 	}
 	
-	function Nute(){
+function Nute(){
 		
 		if(!Nute_music){
 			
@@ -165,20 +180,10 @@ let StatePlayStop=false;
 			
 			NuteSound.classList.remove("icon-volume-mute");
 			NuteSound.classList.add("icon-volume-high");
-			
-			
-			
-			
-				
-				
+	
 			}		
 	}
 	
-	
-	
-	
-	
-		
 function timeToMinute(times){
     var result = '00:00:00';
     var hour,minute,second
@@ -221,15 +226,6 @@ function StopAnimation(){
 		
 
 	}
-
-
-document.getElementById("SelectMusic").addEventListener("click", function(){
-
-
-Select_Music();
-	
-});
-
 
 function Open_Foulder_Music(){
 	
@@ -311,69 +307,60 @@ var  options = {
 	}
 	
 const response = window.dialog().showOpenDialog(null,options).then(result => {
-			 
-			 // console.log(result.canceled) //si se cansela 
-			  // console.log(result.filePaths) // url
-			  
-				// console.log(result)
 
 				CreatePlayList(result.filePaths);			  
 				
 				obtenido = result.filePaths;
 				
+				// console.log(obtenido);
+				
 				})
 				.catch(err => {
 					console.log(err)
 				});
-		
-
-
-  
-  
-	
 }
-
-var selectAnterior = 0;
 
 function CreatePlayList(data){
 	
-	
 	Reset_Containner("List-Music");
-	
 	
 	obtenido = [];
 	obtenido = data;
 	
+	let ItemMusic;
 	
 	data.forEach((file, index) => {					
 
-
-	let ItemMusic = document.createElement("div");
+		ItemMusic = document.createElement("div");
 		ItemMusic.className="List-Item";
 		ItemMusic.addEventListener("click", function(){ 
 					
-		Reproductor.src = file;
-		document.getElementById("time-progress").innerHTML = " -- | -- ";
-		document.getElementById("time-progress").innerHTML = timeToMinute(Reproductor.currentTime) +" | "+timeToMinute(Reproductor.duration);
-		document.getElementById("TitleMusic").innerHTML =  window.path().parse(file).name; 
-		Pause();
-		Play();
+			Reproductor.src = file;
+			document.getElementById("time-progress").innerHTML = timeToMinute(Reproductor.currentTime) +" | "+timeToMinute(Reproductor.duration);
+			document.getElementById("TitleMusic").innerHTML =  window.path().parse(file).name; 
 
-	         // selectAnterior=index;
-			 
-			// for(let a=0; a<ItemMusic.length; a++){
+			Pos_in_list = index;
 				
-				// ItemMusic.classList.remove("active-music");
+				PosNow = Pos_in_list;
 				
 				
-			// }
-			  
+				Reproductor.pause();
+				StopAnimation();	
+				StatePlayStop=true;			
+				ButtonPlayStop.classList.remove("icon-pause2");
+				ButtonPlayStop.classList.add("icon-play3");
+
+				Reproductor.play();
+				PlayAnimation();
+							
+				StatePlayStop=false;				
+				ButtonPlayStop.classList.remove("icon-play3");
+				ButtonPlayStop.classList.add("icon-pause2");
 			
 			
-			// ItemMusic.classList.add("active-music");
-			  
-		Pos_in_list = index;
-
+			
+			
+	
 		});
 		
 	let ListMusic = document.getElementById("List-Music");
@@ -400,17 +387,12 @@ function CreatePlayList(data){
 	let Containner2 = document.getElementsByClassName("List-Item")[index]
 		Containner2.appendChild(NameMusic);
 /*****************/	
-	// let TimeMusic = document.createElement("span");
-		// TimeMusic.class="PlayListText";
-		// TimeMusic.innerHTML=timeToMinute(Reproductor.duration);
-		// TimeMusic.style.color="white";
-		// TimeMusic.style.fontSize="16px";
-	// let Containner3 = document.getElementsByClassName("List-Item")[index]
-		// Containner3.appendChild(TimeMusic);
-				
-				// console.log(Reproductor.duration);
-				
+
 					 });
+					 
+			ReproducirPrimero(ItemMusic);		 
+			
+			ItemActive();
 
 }
 
@@ -425,12 +407,59 @@ function Reset_Containner(id){
 
 	}
 
+function ReproducirPrimero(obj){
+
+		Reproductor.src = obtenido[0];
+		console.log(obtenido[0]);
+		document.getElementById("time-progress").innerHTML = timeToMinute(Reproductor.currentTime) +" | "+timeToMinute(Reproductor.duration);
+		document.getElementById("TitleMusic").innerHTML =  window.path().parse(obtenido[0]).name; 
+
+		Reproductor.play();
+		PlayAnimation();
+
+		StatePlayStop=false;
+
+		document.getElementsByClassName("List-Item")[0].classList.add("active-music");
+		ButtonPlayStop.classList.remove("icon-play3");
+		ButtonPlayStop.classList.add("icon-pause2");
+
+	
+}
+
+function ItemActive(){	
+	var item = document.getElementsByClassName("List-Item");			
+	for(var i = 0; i < item.length; i++){
+		  item[i].addEventListener("click", function(){
+				var current = document.getElementsByClassName("active-music");
+				current[0].className = current[0].className.replace("active-music", "");
+				this.className += " active-music";
+		  });
+	}
+}
+
+	 
 
 
 
 
 
 
+
+
+
+
+
+
+//Code not uses	 
+		// selectAnterior=index;
+			 
+			// for(let a=0; a<ItemMusic.length; a++){
+				
+				// ItemMusic.classList.remove("active-music");
+							
+			// }
+			
+			// ItemMusic.classList.add("active-music");
 
 
 

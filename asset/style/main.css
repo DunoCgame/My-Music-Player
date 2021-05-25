@@ -70,7 +70,8 @@ body{
 
 #List-Music{
 
-	overflow:auto;
+	overflow:hidden;
+	
 	background:#737373;
 
 }

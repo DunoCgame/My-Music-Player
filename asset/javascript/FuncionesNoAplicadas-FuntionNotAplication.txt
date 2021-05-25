@@ -1,3 +1,16 @@
+	
+							
+// window.onload=function(){
+
+	// LabelVolume.innerHTML = 50+"%";
+	
+	// document.getElementById("time-progress").innerHTML = "00:00:00" +" | "+"00:00:00";
+
+// }
+	
+	
+	
+	
 	<!-- <div id="myProgress" class="progres-Bar"> -->
 	  <!-- <div id="myBar"></div> -->
 	<!-- </div> -->
@@ -57,3 +70,18 @@ function SearchMusic(Foulder_Select){
 			
 }
 }
+
+
+
+	// let TimeMusic = document.createElement("span");
+		// TimeMusic.class="PlayListText";
+		// TimeMusic.innerHTML=timeToMinute(Reproductor.duration);
+		// TimeMusic.style.color="white";
+		// TimeMusic.style.fontSize="16px";
+	// let Containner3 = document.getElementsByClassName("List-Item")[index]
+		// Containner3.appendChild(TimeMusic);
+				
+				// console.log(Reproductor.duration);
+				
+					 });
+					 
